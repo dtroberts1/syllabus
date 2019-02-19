@@ -1,0 +1,1 @@
+tests=/path/to/syllabus/project/tests; project=/path/to/project; outdir=$tests/out; mkdir -p $outdir; for i in $tests/*.pl0; do <span style="background-color:#fff">stem=$(basename -- ${i%%.pl0})</span>; $project/compiler --lex $i > $outdir/${stem}.tokens; diff $tests/${stem}.tokens $outdir/${stem}.tokens | tee $outdir/${stem}.tokens_diff; done
