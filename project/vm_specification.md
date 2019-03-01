@@ -73,36 +73,36 @@ Some pseudo is left as homework to fill in.
 
     // arithmetic
     add dest ri rj:    reg[dest] := reg[ri] + reg[rj]
-    sub dest ri rj:    ?
-    mul dest ri rj:    ?
-    div dest ri rj:    ?
-    mod dest ri rj:    ?
+    sub dest ri rj:    reg[dest] := reg[ri] - reg[rj]
+    mul dest ri rj:    reg[dest] := reg[ri] * reg[rj]
+    div dest ri rj:    reg[dest] := reg[ri] / reg[rj]
+    mod dest ri rj:    reg[dest] := reg[ri] % reg[rj]
 
     addi dest ri imm:  reg[dest] := reg[ri] + imm
-    subi dest ri imm:  ?
-    muli dest ri imm:  ?
-    divi dest ri imm:  ?
-    modi dest ri imm:  ?
+    subi dest ri imm:  reg[det] := reg[ri] - imm
+    muli dest ri imm:  reg[dest] := reg[ri] * imm
+    divi dest ri imm:  reg[dest] := reg[ri] / imm
+    modi dest ri imm:  reg[dest] := reg[ri] % imm
 
     // compare and branch
     cmp ri rj:         z := reg[ri] == reg[rj] ? 1 : 0
                        n := reg[ri] < reg[rj] ? 1 : 0
-    cmpi ri imm:
-
+    cmpi ri imm:       z := reg[ri] == imm ? 1 : 0
+                       n := reg[ri] < imm ? 1 : 0
     beq disp:          if (z) next := ip + disp
     bne disp:          if (!z) next := ip + disp
     blt disp:          if (n) next := ip + disp
-    ble disp:          ?
-    bgt disp:          ?
-    bge disp:          ?
-    br disp:           ?
+    ble disp:          if (n || z) next := ip + disp
+    bgt disp:          if (!n && !z) next := ip + disp
+    bge disp:          if (!n) next := ip + disp
+    br disp:           next := ip + disp
     bl disp:           ln := ip + 1; next = ip + disp
-    ret ri:            next := ?
+    ret ri:            next := reg[ri]
 
     // storage
-    mov dest ri:       ?
-    movi dest imm:     ?
+    mov dest ri:       reg[dest] != reg[ri]
+    movi dest imm:     reg[dest] != imm
     ld dest ri imm:    reg[dest] = mem[reg[ri]] + imm
-    st src ri imm:     ?
+    st src ri imm:     mem[reg[ri] + imm] = reg[src]
     psh src ri:        reg[ri]++; mem[reg[ri]] = reg[src]
-    pop dest ri:       ?  (remember that ri points to top element of stack)
+    pop dest ri:       reg[dest] :=  mem[reg[ri]]; reg[ri]-- (remember that ri points to top element of stack)
