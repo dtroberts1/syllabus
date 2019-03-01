@@ -79,7 +79,7 @@ Some pseudo is left as homework to fill in.
     mod dest ri rj:    reg[dest] := reg[ri] % reg[rj]
 
     addi dest ri imm:  reg[dest] := reg[ri] + imm
-    subi dest ri imm:  reg[det] := reg[ri] - imm
+    subi dest ri imm:  reg[dest] := reg[ri] - imm
     muli dest ri imm:  reg[dest] := reg[ri] * imm
     divi dest ri imm:  reg[dest] := reg[ri] / imm
     modi dest ri imm:  reg[dest] := reg[ri] % imm
